@@ -19,7 +19,8 @@ server = net.createServer(function (client) {
         clients.forEach(function (client) {
             // Don't want to send it to sender
             if (client === sender) return;
-            client.write(message);
+	    if(client.writable)
+	            client.write(message);
         });
         // Log it to the server output too
         process.stdout.write("["+sender.remoteAddress+"]: " + message)
